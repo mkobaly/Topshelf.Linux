@@ -15,6 +15,7 @@
 using System;
 
 using Topshelf.HostConfigurators;
+using Topshelf.Linux;
 using Topshelf.Runtime.Linux;
 
 namespace Topshelf
@@ -28,6 +29,7 @@ namespace Topshelf
 				// Needed to overcome mono-service style arguments.
 				configurator.ApplyCommandLine(MonoHelper.GetUnparsedCommandLine());
 				configurator.UseEnvironmentBuilder((cfg) => new LinuxHostEnvironmentBuilder(cfg));
+                configurator.UseHostBuilder((environment, settings) => new LinuxRunBuilder(environment, settings));
 			}
 		}
 	}
